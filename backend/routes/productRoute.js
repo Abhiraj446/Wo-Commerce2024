@@ -9,7 +9,7 @@ router.route("/products/create").post(createProduct)
 router.route("/products").get(isAuthenticated,authorizeRoles("admin"),findAllProduct)
 router.route("/products/update/:_id").put(updateProduct)
 router.route("/products/delete/:_id").delete(deleteProduct)
-router.route("/review").put(isAuthenticated,productReview)
+router.route("/review").put(isAuthenticated,productReview)  
 
 
 module.exports = router;
