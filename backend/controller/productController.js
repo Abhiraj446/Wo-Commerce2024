@@ -115,8 +115,6 @@ if(!product){
   };
 
   //   // Check if the user already reviewed this product  
-  
-  // __aayega
   const isReviewed = product.reviews.find(rev=>rev.user.toString()===req.user._id.toString())
 
   if(isReviewed){
