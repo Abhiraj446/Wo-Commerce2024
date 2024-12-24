@@ -1,24 +1,43 @@
-import { Fragment, useEffect } from "react";
+import { useEffect } from "react";
 import "./home.css";
-import Product from "./Product";
-// import { CiDesktopMouse1, CiHospital1 } from "react-icons/ci";
+import Product from "./Product";  // Ensure this component is set up correctly
 import { getProduct } from "../../action/productAction.js";
 import { useSelector, useDispatch } from "react-redux";
+import Loader from "../layout/loader/loader.jsx";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { products, loading } = useSelector((state) => {
-    console.log("component state", state.products.product);
-    return state.products;
-  });
+  
+  // Get products and loading state from Redux store
+  const { products, loading } = useSelector((state) => state.products);
 
+  // Dispatch action to fetch products when the component mounts
   useEffect(() => {
     dispatch(getProduct());
   }, [dispatch]);
 
-  // console.log("home", products);
+  console.log("components", products.images)
+
   return (
-   <h1>hello</h1>
+    <div className="home">
+      {/* Show Loader only when loading is true */}
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="product-list">
+          {products && products.length > 0 ? (
+            products.map((product) => (
+              <Product key={product.id} product={product} />
+            ))
+          ) : (
+            <p>No products available</p>
+          )}
+        </div>
+      )}
+    </div>
   );
 };
+
 export default Home;
+
+

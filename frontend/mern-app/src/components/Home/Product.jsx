@@ -1,37 +1,14 @@
-// import React from "react";
-// import './home.css'
-// import { Link } from "react-router-dom";
-// import ReactStars from 'react-rating-stars-component'
+import React from "react";
 
-// const options={
-//     edit:false,
-//     color:"rgb(20,20,20,0.5)",
-//     activeColor:"red",
-//     value:3
-// }
-
-// const Products=({products})=>{
-//     return(
-//         <>
-//         <Link className="product-card" to={products.id}>
-//             <img src={products.image[0].url} alt={products.name} />
-//             <br />
-//             <p>{products.name}</p>
-//             <div className="stars"><ReactStars {...options}/><span>(100 reviews)</span></div>
-//             <p>{products.price}</p>
-//         </Link>
-//         </>
-//     )
-// }
-// export default Products
-
-
-import React from 'react'
-
-const Product = () => {
+const Product = ({ product }) => {
   return (
-    <div>Product</div>
-  )
-}
+    <div className="product">
+      <img src={product.image} alt={product.name} />
+      <h2>{product.name}</h2>
+      <p>{product.description}</p>
+      <span>${product.price}</span>
+    </div>
+  );
+};
 
-export default Product
+export default Product;

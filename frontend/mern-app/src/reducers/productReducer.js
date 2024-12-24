@@ -6,7 +6,7 @@ import {
 } from "../constants/productConstant.js";
 
 const initialState = {
-  products: [],
+  products: [], // This is what we will use consistently
   loading: false,
   error: null,
   totalProduct: 0,
@@ -18,29 +18,31 @@ export const productReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        products: [],
+        products: [], 
       };
+
     case ALL_PRODUCT_SUCCESS:
-      // console.log("Reducer Payload:", action.payload);
-      // Debug payload
       return {
         loading: false,
-        product: action.payload.product, // Handle potential undefined
-        totalProduct: action.payload.totalProduct,
+        products: action.payload.product || [], // Default to an empty array if 'product' is undefined
+        totalProduct: action.payload.totalProduct || 0, // Default to 0 if 'totalProduct' is undefined
         error: null,
       };
+
     case ALL_PRODUCT_FAIL:
       return {
         ...state,
         loading: false,
         error: action.payload,
-        product: [],
+        products: [], // Ensure products are cleared on error
       };
+
     case CLEAR_ERRORS:
       return {
         ...state,
         error: null,
       };
+
     default:
       return state;
   }
