@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import "./home.css";
 import Product from "./Product";  // Ensure this component is set up correctly
 import { getProduct } from "../../action/productAction.js";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layout/loader/loader.jsx";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -16,14 +17,15 @@ const Home = () => {
     dispatch(getProduct());
   }, [dispatch]);
 
-  console.log("components", products.images)
 
   return (
-    <div className="home">
+    <Fragment>
+      <Helmet title="HOME-PAGE"/>
       {/* Show Loader only when loading is true */}
       {loading ? (
         <Loader />
       ) : (
+        <Fragment>
         <div className="product-list">
           {products && products.length > 0 ? (
             products.map((product) => (
@@ -33,8 +35,9 @@ const Home = () => {
             <p>No products available</p>
           )}
         </div>
+        </Fragment>
       )}
-    </div>
+</Fragment>
   );
 };
 
